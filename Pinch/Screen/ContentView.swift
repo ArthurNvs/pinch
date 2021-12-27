@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
   @State private var isAnimating = false
   @State private var imageScale: CGFloat = 1
+  @State private var imageOffset: CGSize = .zero //CGSize(width: 0, height: 0)
   
   var body: some View {
     NavigationView {
@@ -22,12 +23,13 @@ struct ContentView: View {
           .padding()
           .shadow(color: .black.opacity(0.2), radius: 12, x: 2, y: 2)
           .opacity(isAnimating ? 1 : 0)
+          .offset(x: imageOffset.width, y: imageOffset.height)
           .scaleEffect(imageScale)
           // MARK: - 1. TAP GESTURE
           .onTapGesture(count: 2) {
             if imageScale == 1 {
               withAnimation(.spring()) {
-                imageScale = 5
+                imageScale = 2
               }
             } else {
               withAnimation(.spring()) {
@@ -35,6 +37,15 @@ struct ContentView: View {
               }
             }
           }
+          // MARK: - 2. DRAG GESTURE
+          .gesture(
+            DragGesture()
+              .onChanged { value in
+                withAnimation(.linear(duration: 1)) {
+                  imageOffset = value.translation
+                }
+              }
+          )
       } //: ZStack
     .navigationTitle("Pinch & Zoom")
     .navigationBarTitleDisplayMode(.inline)
