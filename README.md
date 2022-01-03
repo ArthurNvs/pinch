@@ -7,7 +7,7 @@ SwiftUI Masterclass project
 - Advanced Pinch and Zoom features
 
 <a href="#">
-    <img align="center" width="50%" height="50%" src="pinch.gif">
+    <img align="center" width="28%" height="50%" src="pinch.gif">
 </a>
 
 #
