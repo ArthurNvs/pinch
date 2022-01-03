@@ -11,6 +11,7 @@ struct ContentView: View {
   @State private var isAnimating = false
   @State private var imageScale: CGFloat = 1
   @State private var imageOffset: CGSize = .zero //CGSize(width: 0, height: 0)
+  @State private var isDrawerOpen = false
   
   func resetImageState() {
     return withAnimation(.spring()) {
@@ -146,12 +147,17 @@ struct ContentView: View {
       .overlay(
         HStack(spacing: 12) {
           // MARK: - DRAWER HANDLER
-          Image(systemName: "chevron.compact.left")
+          Image(systemName: isDrawerOpen ? "chevron.compact.right" : "chevron.compact.left")
             .resizable()
             .scaledToFit()
             .frame(height: 40)
             .padding()
             .foregroundStyle(.secondary)
+            .onTapGesture(perform: {
+              withAnimation(.easeOut) {
+                isDrawerOpen.toggle()
+              }
+            })
           
           // MARK: - THUMBNAILS
           Spacer()
@@ -162,6 +168,7 @@ struct ContentView: View {
           .opacity(isAnimating ? 1 : 0)
           .frame(width: 260)
           .padding(.top, UIScreen.main.bounds.height / 12)
+          .offset(x: isDrawerOpen ? 20 : 215)
         , alignment: .topTrailing
       )
     } //: NavigationView
