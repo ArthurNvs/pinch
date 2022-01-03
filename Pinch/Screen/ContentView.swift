@@ -142,6 +142,28 @@ struct ContentView: View {
           .padding(.bottom, 30)
         , alignment: .bottom
       )
+      // MARK: - DRAWER
+      .overlay(
+        HStack(spacing: 12) {
+          // MARK: - DRAWER HANDLER
+          Image(systemName: "chevron.compact.left")
+            .resizable()
+            .scaledToFit()
+            .frame(height: 40)
+            .padding()
+            .foregroundStyle(.secondary)
+          
+          // MARK: - THUMBNAILS
+          Spacer()
+        } //: DRAWER
+          .padding(EdgeInsets(top: 16, leading: 8, bottom: 16, trailing: 8))
+          .background(.ultraThinMaterial)
+          .cornerRadius(12)
+          .opacity(isAnimating ? 1 : 0)
+          .frame(width: 260)
+          .padding(.top, UIScreen.main.bounds.height / 12)
+        , alignment: .topTrailing
+      )
     } //: NavigationView
     .navigationViewStyle(.stack)
   }
